@@ -49,21 +49,12 @@ class InteractiveOptionsProvider implements InteractiveOptionsProviderInterface
         );
 
         return [
-            'klaviyo' => [
-                'active' => false
-            ],
-            'gtm' => [
-                'active' => false
-            ],
-            'moi' => [
-                'active' => false
-            ],
             'theme' => [
                 'modules' => [
                     'resultInfiniteScroll' => [
-                            'quickSearch' => ['enable' => true], //Make it true only if you want scroll on quick search
-                            'searchResultsPage' => ['enable' => true], //Make it true only if you want scroll on Search page
-                            'categoryPage' => ['enable' => true],
+                            'quickSearch' => ['enable' => false], //Make it true only if you want scroll on quick search
+                            'searchResultsPage' => ['enable' => false], //Make it true only if you want scroll on Search page
+                            'categoryPage' => ['enable' => false], //Make it true only if you want scroll on category page
                         ]
                 ]
             ]

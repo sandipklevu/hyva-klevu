@@ -8,7 +8,10 @@
         catnav.type = 'text/javascript';
         catnav.defer = true;
         catnav.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/catnav-theme.js')) ?>';
-        document.head.appendChild(catnav);
+        //BELOW LISTENER CAN ENABLE
+        //window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(catnav);
+        //}, {once: true, passive: true});
     </script>
 <?php else: ?>
     <script type="text/javascript">
@@ -16,7 +19,10 @@
         catnav.type = 'text/javascript';
         catnav.defer = true;
         catnav.src = 'https://js.klevu.com/theme/default/v2/catnav-theme.js';
-        document.head.appendChild(catnav);
+        //BELOW LISTENER CAN ENABLE
+        //window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(catnav);
+        //}, {once: true, passive: true});
     </script>
 <?php endif; ?>
 

@@ -7,7 +7,10 @@
         landing.type = 'text/javascript';
         landing.defer = true;
         landing.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/landing-page-theme.js')) ?>';
-        document.head.appendChild(landing);
+        //BELOW LISTENER CAN ENABLE
+        //window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(landing);
+        //}, {once: true, passive: true});
     </script>
 <?php else: ?>
     <script type="text/javascript">
@@ -15,7 +18,10 @@
         landing.src = 'https://js.klevu.com/theme/default/v2/landing-page-theme.js';
         landing.type = 'text/javascript';
         landing.defer = true;
-        document.head.appendChild(landing);
+        //BELOW LISTENER CAN ENABLE
+        //window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(landing);
+        //}, {once: true, passive: true});
     </script>
 <?php endif; ?>
 <div class="klevuLanding"></div>
