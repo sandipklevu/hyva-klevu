@@ -1,0 +1,32 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */
+/** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
+<?php $viewModel = $block->getData('view_model'); ?>
+<?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    <script
+        src="<?= $block->getViewFileUrl('Klevu_HyvaPage::js/klevu.js') ?>"></script>
+<?php else: ?>
+    <script type="text/javascript" src="https://js.klevu.com/core/v2/klevu.js"></script>
+<?php endif; ?>
+
+<?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    <script type="text/javascript">
+        const qs = document.createElement('script');
+        qs.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/quick-search-theme.js')) ?>';
+        qs.type = 'text/javascript';
+        qs.defer = true;
+        window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(qs);
+        }, {once: true, passive: true});
+    </script>
+<?php else: ?>
+    <script type="text/javascript">
+        const qs = document.createElement('script');
+        qs.src = 'https://js.klevu.com/theme/default/v2/quick-search-theme.js';
+        qs.type = 'text/javascript';
+        qs.defer = true;
+        window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(qs);
+        }, {once: true, passive: true});
+    </script>
+
+<?php endif; ?>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="klevu" translate="label" sortOrder="200">
+            <label>Klevu</label>
+        </tab>
+        <section id="klevu_search" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Search Configuration</label>
+            <tab>klevu</tab>
+            <resource>Klevu_Search::config_search</resource>
+            <group id="developer" translate="label comment" sortOrder="900" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <field id="use_self_host" translate="label comment" sortOrder="550" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Self Hosted Klevu JS Files</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

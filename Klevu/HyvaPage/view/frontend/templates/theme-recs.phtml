@@ -1,0 +1,24 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */
+/** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
+<?php $viewModel = $block->getData('view_model'); ?>
+<?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    <script type="text/javascript">
+        const recs = document.createElement('script');
+        recs.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/klevu-recs.js')) ?>';
+        recs.type = 'text/javascript';
+        //USED THE UserInteractionEvent Listener
+        window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(recs);
+        }, {once: true, passive: true});
+    </script>
+<?php else: ?>
+    <script type="text/javascript">
+        const recs = document.createElement('script');
+        recs.src = 'https://js.klevu.com/recs/v2/klevu-recs.js';
+        recs.type = 'text/javascript';
+        //USED THE UserInteractionEvent Listener
+        window.addEventListener('init-external-scripts', () => {
+            document.head.appendChild(recs);
+        }, {once: true, passive: true});
+    </script>
+<?php endif; ?>

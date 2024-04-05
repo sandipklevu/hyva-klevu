@@ -1,0 +1,153 @@
+<script>
+    // Add Price Field Suffix for customer group and currency conversion
+    var klevu_addPriceSuffixToQueryControl = {
+        name: "addPriceSuffixToQuery",
+        fire: function (data, scope) {
+            var customerData = JSON.parse(window.localStorage.getItem("klv_mage") || "{}").customerData || {
+                customer_group_id: 32000,
+            };
+            klevu.search.modules.addPriceSuffixToQuery(data, scope, klevu_baseCurrencyCode, customerData.customer_group_id);
+        },
+    };
+
+    (function (klevu) {
+        klevu.extend(true, klevu.search.modules, {
+            addPriceSuffixToQuery: function (data, scope, currencyCode, customerGroupId) {
+                if (typeof data.request.current === "undefined") {
+                    return false;
+                }
+
+                klevu.each(data.request.current.recordQueries, function (key, query) {
+                    //code to fetch prices
+                    klevu.setObjectPath(data, "localOverrides.query." + query.id + ".settings.priceFieldSuffix", currencyCode + "-" + customerGroupId);
+                });
+            },
+            mageConvertPriceRecordCurrencyData: function (productRecords, currencyCode, currencyRates) {
+                if (!productRecords) {
+                    return;
+                }
+
+                klevu.each(productRecords, function (recordKey, productRecord) {
+                    var fromRate = parseFloat(currencyRates[productRecord.currency] || 0);
+                    var toRate = parseFloat(currencyRates[currencyCode] || 0);
+                    if (!fromRate || !toRate) {
+                        return;
+                    }
+
+                    var exchangeRate = toRate / fromRate;
+
+                    if (klevu.isNumeric(klevu.getObjectPath(productRecord, "price"))) {
+                        productRecord.price *= exchangeRate;
+                    }
+                    if (klevu.isNumeric(klevu.getObjectPath(productRecord, "salePrice"))) {
+                        productRecord.salePrice *= exchangeRate;
+                    }
+                    if (klevu.isNumeric(klevu.getObjectPath(productRecord, "startPrice"))) {
+                        productRecord.startPrice *= exchangeRate;
+                    }
+
+                    productRecord.currency = currencyCode;
+                });
+            },
+        });
+    })(klevu);
+
+    klevu.interactive(function () {
+        var options = {
+            theme: {
+                modules: {
+                    resultInfiniteScroll: {
+                        quickSearch: {enable: true},
+                        searchResultsPage: {enable: true},
+                        categoryPage: {enable: true}
+                    }
+                }
+            },
+        };
+
+        // Magento image path needs to be updated if pubIsInUse
+        klevu.coreEvent.attach("setRemoteConfigRecsBaseUpdates", {
+            name: "klevuMagentoImage",
+            fire: function () {
+                klevu.recs.base.getScope().chains.search.control.add({
+                    name: "klevuMagentoImage",
+                    fire: function (data, scope) {
+                        scope.recsScope.searchObject.getScope().chains.template.process.success.add({
+                            name: "klevuMagentoImage",
+                            fire: function (data, scope) {
+                                if (typeof window.klevu_pubIsInUse == "undefined") {
+                                    window.klevu_pubIsInUse = true;
+                                }
+                                klevu.each(data.template.query, function (key, query) {
+                                    if (query.result.length > 0) {
+                                        klevu.each(query.result, function (key, product) {
+                                            if (window.klevu_pubIsInUse) {
+                                                product.image = product.image.replace("pub/", "");
+                                                product.image = product.image.replace("needtochange/", "");
+                                            } else {
+                                                product.image = product.image.replace("needtochange/", "pub/");
+                                            }
+                                        });
+                                    }
+                                });
+                            },
+                        });
+                    },
+                });
+            },
+        });
+
+        klevu(options);
+    });
+
+    var nowUnixtime = parseInt(Date.now() / 1000);
+
+    function klevufejs_getCookie(name) {
+        if (typeof name === "undefined") {
+            name = "klv_mage";
+        }
+        var c = "",
+            ca = document.cookie.split(";");
+
+        for (var i = 0; i < ca.length; i++) {
+            c = ca[i];
+            if (typeof c !== "string") {
+                continue;
+            }
+            var cookiePair = c.split("=");
+
+            if (name === cookiePair[0].trim()) {
+                try {
+                    return JSON.parse(decodeURIComponent(cookiePair[1]));
+                } catch (err) {
+                    // this is fine, data will be regenerated
+                }
+            }
+        }
+        return {
+            expire_sections: {},
+        };
+    }
+
+    document.addEventListener("klevu.customerData.loaded", function (e) {
+        var klevufejs_cookie = klevufejs_getCookie();
+        klevufejs_cookie.expire_sections.customerData = nowUnixtime + 600;
+
+        document.cookie = "klv_mage=" + JSON.stringify(klevufejs_cookie) + ";" + new Date((nowUnixtime + 3600) * 1000).toUTCString() + ";path=/;SameSite=Strict";
+    });
+
+    var klevufejs_cookie = klevufejs_getCookie();
+    var klevuData = {
+        ...{
+            customerData: {
+                revalidate_after: -1,
+            },
+        },
+        ...JSON.parse(window.localStorage.getItem("klv_mage") || "{}"),
+    };
+
+    const klevuCustomerDataLoadedEvent = document.createEvent("CustomEvent");
+    klevuCustomerDataLoadedEvent.initEvent("klevu.customerData.loaded", false, true);
+    const klevuCustomerDataLoadErrorEvent = document.createEvent("CustomEvent");
+    klevuCustomerDataLoadErrorEvent.initEvent("klevu.customerData.loadError", false, true);
+</script>

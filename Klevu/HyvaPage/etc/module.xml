@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Klevu_HyvaPage">
+        <sequence>
+            <module name="Klevu_FrontendJs"/>
+            <module name="Klevu_Search"/>
+            <module name="Klevu_Registry"/>
+            <module name="Klevu_Recommendations"/>
+        </sequence>
+    </module>
+</config>

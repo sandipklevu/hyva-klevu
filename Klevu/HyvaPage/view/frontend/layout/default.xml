@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Removing for native module -->
+        <remove src="Klevu_Search::js/klevu/ieUrlPolyfill.js"/>
+        <!-- Injecting with defer -->
+        <script src="Klevu_Search::js/klevu/ieUrlPolyfill.js" defer="true" ie_condition="IE 11"/>
+    </head>
+    <body>
+        <referenceBlock name="klevu.search.form_js" remove="true"/>
+        <referenceBlock name="personal_data" remove="true"/>
+
+        <!--<referenceBlock name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   template="Klevu_HyvaPage::theme-core.phtml"
+                   name="klevu-js-core"
+                   ifconfig="klevu_search/general/enabled"/>
+
+            <block class="Magento\Framework\View\Element\Template"
+                   template="Klevu_HyvaPage::theme-recs.phtml"
+                   name="klevu-js-recs"
+                   after="klevu-js-core"
+                   ifconfig="klevu_search/recommendations/enabled"/>
+
+            <block class="Magento\Framework\View\Element\Template"
+                   template="Klevu_HyvaPage::theme-recs-block.phtml"
+                   name="klevu-js-recs-block"
+                   ifconfig="klevu_search/recommendations/enabled"/>
+        </referenceBlock>-->
+
+        <!--<referenceBlock name="footer-content">
+            <block name="klevu_frontendjs.js_api_keys"
+                   class="Klevu\FrontendJs\Block\Html\Head\JsApiKeys"
+                   template="Klevu_FrontendJs::html/head/js_api_keys.phtml">
+            </block>
+            <block name="klevu_frontendjs.js_init"
+                   class="Klevu\FrontendJs\Block\Html\Head\JsInit"
+                   template="Klevu_FrontendJs::html/head/js_init.phtml">
+                <container name="klevu_frontendjs.js_init.additional.before" as="additional_before"/>
+                <container name="klevu_frontendjs.js_init.additional.after" as="additional_after"/>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="klevu_frontendjs.js_init.additional.before">
+            <block class="Magento\Framework\View\Element\Template"
+                   after="-"
+                   name="klevu_js_additional_recs_js"
+                   template="Klevu_HyvaPage::theme-recs-js.phtml"
+                   ifconfig="klevu_search/recommendations/enabled"/>
+        </referenceBlock>-->
+    </body>
+</page>

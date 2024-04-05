@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="klevu_frontendjs.js_preconnect" remove="true"/>
+        <referenceBlock name="klevu_frontendjs.js_includes.core" remove="true"/>
+        <referenceBlock name="klevu_frontendjs.js_includes" remove="true"/>
+        <referenceBlock name="klevu_recommendations.js_includes" remove="true"/>
+
+        <referenceBlock name="klevu_frontendjs.js_deferred_powerup" remove="true"/>
+        <referenceBlock name="klevu_frontendjs.js_modules" remove="true"/>
+        <referenceBlock name="klevu_js_additional" remove="true"/>
+
+        <!--<referenceBlock name="klevu_frontendjs.js_api_keys" remove="true"/>-->
+        <!--<referenceBlock name="klevu_frontendjs.js_init" remove="true"/>-->
+        <referenceBlock name="klevu_frontendjs.session_data" remove="true"/>
+
+        <referenceBlock name="klevu_search.html_head.themev2.inline_currency_translation" remove="true"/>
+        <referenceBlock name="klevu_categorynavigation.html_head.themev2.add_price_suffix_to_query" remove="true"/>
+
+        <referenceBlock name="klevu_categorynavigation.html_head.themev2.inline_currency_translation" remove="true"/>
+        <referenceBlock name="klevu_categorynavigation.html_head.themev2.add_price_suffix_to_query" remove="true"/>
+
+        <referenceBlock name="klevu_recommendations.html_head.themev2.inline_currency_translation" remove="true"/>
+
+        <referenceBlock name="klevu.search.form_js" remove="true"/>
+        <referenceBlock name="personal_data" remove="true"/>
+
+    </body>
+</page>

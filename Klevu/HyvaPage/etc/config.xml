@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <klevu_search>
+            <developer>
+                <use_self_host>0</use_self_host>
+            </developer>
+        </klevu_search>
+    </default>
+</config>

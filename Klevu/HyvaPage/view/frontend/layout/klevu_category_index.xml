@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="klevu_categorynavigation.html_head.themev2.inline_currency_translation" remove="true"/>
+        <referenceBlock name="klevu_categorynavigation.html_head.themev2.add_price_suffix_to_query" remove="true"/>
+        <referenceBlock name="klevu_js_additional.catnav" remove="true"/>
+
+        <referenceBlock name="content">
+            <block class="Klevu\HyvaPage\Block\Html\Head\JsAdditional"
+                   name="klevu_deferjs_additional.catnav"
+                   after="klevu-js-core"
+                   template="Klevu_HyvaPage::theme-catnav.phtml"
+                   ifconfig="klevu_search/categorylanding/enabledcategorynavigation">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Klevu\HyvaPage\ViewModel\JSFileSourceDataProvider
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

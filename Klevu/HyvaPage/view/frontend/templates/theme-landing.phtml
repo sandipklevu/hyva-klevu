@@ -1,0 +1,21 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */
+/** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
+<?php $viewModel = $block->getData('view_model'); ?>
+<?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    <script type="text/javascript">
+        const landing = document.createElement('script');
+        landing.type = 'text/javascript';
+        landing.defer = true;
+        landing.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/landing-page-theme.js')) ?>';
+        document.head.appendChild(landing);
+    </script>
+<?php else: ?>
+    <script type="text/javascript">
+        const landing = document.createElement('script');
+        landing.src = 'https://js.klevu.com/theme/default/v2/landing-page-theme.js';
+        landing.type = 'text/javascript';
+        landing.defer = true;
+        document.head.appendChild(landing);
+    </script>
+<?php endif; ?>
+<div class="klevuLanding"></div>

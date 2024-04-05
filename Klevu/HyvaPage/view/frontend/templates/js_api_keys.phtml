@@ -1,0 +1,17 @@
+<?php
+/** @var Klevu\FrontendJs\Block\Html\Head\JsApiKeys $block */
+?>
+<script type="text/javascript" id="klevu_jsapikeys_hyva">
+    window._klvWebhook = window._klvWebhook || [];
+    window._klvWebhook.push({
+        object: "core",
+        scope: "all",
+        name: "framework",
+        action: "init",
+        fire: function () {
+            klevu.support.hook(["search"], function () {
+                klevu(<?php /** @noEscape */ echo $block->getJsApiKeysSerialized(); ?>);
+            });
+        }
+    });
+</script>
