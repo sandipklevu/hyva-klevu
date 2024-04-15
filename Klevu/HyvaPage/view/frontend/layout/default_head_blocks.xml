@@ -11,8 +11,8 @@
         <referenceBlock name="klevu_frontendjs.js_modules" remove="true"/>
         <referenceBlock name="klevu_js_additional" remove="true"/>
 
-        <!--<referenceBlock name="klevu_frontendjs.js_api_keys" remove="true"/>-->
-        <!--<referenceBlock name="klevu_frontendjs.js_init" remove="true"/>-->
+        <referenceBlock name="klevu_frontendjs.js_api_keys" remove="true"/>
+        <referenceBlock name="klevu_frontendjs.js_init" remove="true"/>
         <referenceBlock name="klevu_frontendjs.session_data" remove="true"/>
 
         <referenceBlock name="klevu_search.html_head.themev2.inline_currency_translation" remove="true"/>

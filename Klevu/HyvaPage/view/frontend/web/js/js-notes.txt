@@ -1,4 +1,6 @@
-Source as on March, 28 2024
-
+Source as on April, 15 2024, Version 2.8.0
+``
+console.log(klevu.version);
+``
 Do not make any changes to the js files which are available in the web/js directory.
 As a fallback, `Klevu -> Search Configuration -> Use Self Hosted Klevu JS Files` to `No`.

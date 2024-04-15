@@ -1,0 +1,16 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */
+/** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
+<?php $viewModel = $block->getData('view_model'); ?>
+
+
+<script type="text/javascript" id="kl_qs_local_fallback">
+    const klQuickSearchJS = document.createElement('script');
+    <?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    klQuickSearchJS.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/quick-search-theme.js')) ?>';
+    <?php else: ?>
+    klQuickSearchJS.src = 'https://js.klevu.com/theme/default/v2/quick-search-theme.js';
+    <?php endif; ?>
+    klQuickSearchJS.type = 'text/javascript';
+    klQuickSearchJS.defer = true;
+    document.head.appendChild(klQuickSearchJS);
+</script>

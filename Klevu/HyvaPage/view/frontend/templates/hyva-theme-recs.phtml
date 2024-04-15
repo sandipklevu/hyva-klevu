@@ -1,8 +1,7 @@
 <?php /** @var Magento\Framework\View\Element\Template $block */
 /** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
 <?php $viewModel = $block->getData('view_model'); ?>
-
-<script type="text/javascript" id="kl_recs_local_fallback">
+<script type="text/javascript" id="klvHyvaRecs">
     const klRecsLibJS = document.createElement('script');
     klRecsLibJS.type = 'text/javascript';
     klRecsLibJS.defer = true;
@@ -11,5 +10,11 @@
     <?php else: ?>
     klRecsLibJS.src = 'https://js.klevu.com/recs/v2/klevu-recs.js';
     <?php endif; ?>
-    document.head.appendChild(klRecsLibJS);
+    //USED THE UserInteractionEvent Listener
+    /**
+     * Ref. https://docs.hyva.io/hyva-themes/writing-code/patterns/loading-external-javascript.html#example-deferring-scripts-until-a-specific-user-interaction
+     */
+    window.addEventListener('init-external-scripts', () => {
+        document.head.appendChild(recs);
+    }, {once: true, passive: true});
 </script>

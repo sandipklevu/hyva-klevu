@@ -2,29 +2,17 @@
 /** @var Hyva\Theme\ViewModel\Escaper $escaper */ ?>
 <?php $viewModel = $block->getData('view_model'); ?>
 
-<?php if ($viewModel->isUseSelfHostedApproach()): ?>
-    <script type="text/javascript">
-        const catnav = document.createElement('script');
-        catnav.type = 'text/javascript';
-        catnav.defer = true;
-        catnav.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/catnav-theme.js')) ?>';
-        //BELOW LISTENER CAN ENABLE
-        //window.addEventListener('init-external-scripts', () => {
-            document.head.appendChild(catnav);
-        //}, {once: true, passive: true});
-    </script>
-<?php else: ?>
-    <script type="text/javascript">
-        const catnav = document.createElement('script');
-        catnav.type = 'text/javascript';
-        catnav.defer = true;
-        catnav.src = 'https://js.klevu.com/theme/default/v2/catnav-theme.js';
-        //BELOW LISTENER CAN ENABLE
-        //window.addEventListener('init-external-scripts', () => {
-            document.head.appendChild(catnav);
-        //}, {once: true, passive: true});
-    </script>
-<?php endif; ?>
+<script type="text/javascript" id="kl_cat_nav">
+    const klCategoryPageJS = document.createElement('script');
+    <?php if ($viewModel->isUseSelfHostedApproach()): ?>
+    klCategoryPageJS.src = '<?= $escaper->escapeJs($block->getViewFileUrl('Klevu_HyvaPage::js/catnav-theme.js')) ?>';
+    <?php else: ?>
+    klCategoryPageJS.src = 'https://js.klevu.com/theme/default/v2/catnav-theme.js';
+    <?php endif; ?>
+    klCategoryPageJS.type = 'text/javascript';
+    klCategoryPageJS.defer = true;
+    document.head.appendChild(klCategoryPageJS);
+</script>
 
 <div class="klevuLanding"></div>
 <script type="text/javascript">

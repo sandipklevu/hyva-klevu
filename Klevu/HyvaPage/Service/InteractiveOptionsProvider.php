@@ -54,10 +54,11 @@ class InteractiveOptionsProvider implements InteractiveOptionsProviderInterface
                     'resultInfiniteScroll' => [
                             'quickSearch' => ['enable' => false], //Make it true only if you want scroll on quick search
                             'searchResultsPage' => ['enable' => false], //Make it true only if you want scroll on Search page
-                            'categoryPage' => ['enable' => false], //Make it true only if you want scroll on category page
+                            'categoryPage' => ['enable' => false],
                         ]
                 ]
             ]
         ];
     }
 }
+

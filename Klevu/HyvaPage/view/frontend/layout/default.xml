@@ -11,42 +11,55 @@
         <referenceBlock name="klevu.search.form_js" remove="true"/>
         <referenceBlock name="personal_data" remove="true"/>
 
-        <!--<referenceBlock name="content">
+        <!-- Should available across all themes hyva, luma or site specific -->
+        <referenceContainer name="before.body.end">
             <block class="Magento\Framework\View\Element\Template"
                    template="Klevu_HyvaPage::theme-core.phtml"
                    name="klevu-js-core"
-                   ifconfig="klevu_search/general/enabled"/>
+                   ifconfig="klevu_search/general/enabled">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Klevu\HyvaPage\ViewModel\JSFileSourceDataProvider
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   template="Klevu_HyvaPage::theme-quick.phtml"
+                   name="klevu-js-quick"
+                   after="klevu-js-core"
+                   ifconfig="klevu_search/general/enabled">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Klevu\HyvaPage\ViewModel\JSFileSourceDataProvider
+                    </argument>
+                </arguments>
+            </block>
 
             <block class="Magento\Framework\View\Element\Template"
                    template="Klevu_HyvaPage::theme-recs.phtml"
                    name="klevu-js-recs"
                    after="klevu-js-core"
-                   ifconfig="klevu_search/recommendations/enabled"/>
-
-            <block class="Magento\Framework\View\Element\Template"
-                   template="Klevu_HyvaPage::theme-recs-block.phtml"
-                   name="klevu-js-recs-block"
-                   ifconfig="klevu_search/recommendations/enabled"/>
-        </referenceBlock>-->
-
-        <!--<referenceBlock name="footer-content">
-            <block name="klevu_frontendjs.js_api_keys"
-                   class="Klevu\FrontendJs\Block\Html\Head\JsApiKeys"
-                   template="Klevu_FrontendJs::html/head/js_api_keys.phtml">
+                   ifconfig="klevu_search/recommendations/enabled">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Klevu\HyvaPage\ViewModel\JSFileSourceDataProvider
+                    </argument>
+                </arguments>
             </block>
-            <block name="klevu_frontendjs.js_init"
+            <block name="klevu_frontendjs.js_api_keys.all-theme"
+                   class="Klevu\FrontendJs\Block\Html\Head\JsApiKeys"
+                   template="Klevu_HyvaPage::js_api_keys.phtml">
+            </block>
+            <block name="klevu_frontendjs.js_init.all-theme"
                    class="Klevu\FrontendJs\Block\Html\Head\JsInit"
-                   template="Klevu_FrontendJs::html/head/js_init.phtml">
+                   template="Klevu_HyvaPage::js_init.phtml">
                 <container name="klevu_frontendjs.js_init.additional.before" as="additional_before"/>
                 <container name="klevu_frontendjs.js_init.additional.after" as="additional_after"/>
             </block>
-        </referenceBlock>
+        </referenceContainer>
         <referenceBlock name="klevu_frontendjs.js_init.additional.before">
             <block class="Magento\Framework\View\Element\Template"
                    after="-"
                    name="klevu_js_additional_recs_js"
                    template="Klevu_HyvaPage::theme-recs-js.phtml"
                    ifconfig="klevu_search/recommendations/enabled"/>
-        </referenceBlock>-->
+        </referenceBlock>
     </body>
 </page>
