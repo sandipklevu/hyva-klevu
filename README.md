@@ -30,12 +30,26 @@ For information about a module installation in Magento 2, see [Enable or disable
 
 ```
 <script type="text/javascript">
-    const qs = document.createElement('script');
-    qs.src = 'https://js.klevu.com/theme/default/v2/quick-search-theme.js';
-    qs.type = 'text/javascript';
-    qs.defer = true;
+    const klQuickSearchJS = document.createElement('script');     
+    klQuickSearchJS.src = 'https://js.klevu.com/theme/default/v2/quick-search-theme.js';
+    klQuickSearchJS.type = 'text/javascript';
+    klQuickSearchJS.defer = true;
     window.addEventListener('init-external-scripts', () => {
-        document.head.appendChild(qs);
+        document.head.appendChild(klQuickSearchJS);
+    }, {once: true, passive: true});
+</script>
+```
+
+## RECS JS theme will listen to init-external-scripts event.
+
+```
+<script type="text/javascript">
+    const klRecsLibJS = document.createElement('script');
+    klRecsLibJS.src = 'https://js.klevu.com/recs/v2/klevu-recs.js';
+    klRecsLibJS.type = 'text/javascript';
+    klRecsLibJS.defer = true;
+    window.addEventListener('init-external-scripts', () => {
+        document.head.appendChild(klRecsLibJS);
     }, {once: true, passive: true});
 </script>
 ```

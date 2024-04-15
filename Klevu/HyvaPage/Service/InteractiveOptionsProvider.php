@@ -61,4 +61,3 @@ class InteractiveOptionsProvider implements InteractiveOptionsProviderInterface
         ];
     }
 }
-
